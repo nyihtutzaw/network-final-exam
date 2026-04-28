@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Applications/**)",
+      "Bash(/Applications/drawio.app/Contents/MacOS/drawio --version)",
+      "Bash(pandoc --version)",
+      "Bash(\"/Applications/draw.io.app/Contents/MacOS/draw.io\" --version)",
+      "Bash(\"/Applications/draw.io.app/Contents/MacOS/draw.io\" --export --format png --output diagram.png --border 20 --scale 2 diagram.drawio)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/nyihtutzaw/Documents/codes/mhdol/network-exam/q1-ransomware-hospital/diagram.png)",
+      "Bash(/Applications/draw.io/Contents/MacOS/draw.io --export --format png --output diagram.png --border 20 diagram.drawio)",
+      "Bash(/Applications/draw.io.app/Contents/MacOS/draw.io --export --format png --output diagram.png --border 20 diagram.drawio)",
+      "Bash(grep -E \"\\\\.\\(md|drawio|png\\)$\")",
+      "Bash(pandoc essay.md -o essay.docx --resource-path=.)",
+      "Bash(pandoc essay.md -o essay.docx --resource-path=. -f markdown+implicit_figures)",
+      "Bash(pandoc essay.md -o essay.docx --resource-path=. --from=markdown --to=docx --table-of-contents --toc-depth=2 --reference-doc=/dev/null)",
+      "Bash(pandoc essay.md -o essay.docx --resource-path=. -V toc=true -V toc-depth=2)",
+      "Bash(python3)",
+      "Bash(pip3 install *)"
+    ]
+  }
+}

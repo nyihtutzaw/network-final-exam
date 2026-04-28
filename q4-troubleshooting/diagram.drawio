@@ -1,0 +1,121 @@
+<mxfile host="app.diagrams.net" modified="2026-04-28T00:00:00.000Z" agent="Claude" version="29.7.9">
+  <diagram id="q4-troubleshooting" name="Cloud-to-Onprem DB Troubleshooting">
+    <mxGraphModel dx="2000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Q4 — Troubleshooting: Cloud apps cannot reach on-prem database" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="350" y="10" width="1200" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="subtitle" value="Top: walk the packet through 5 hops, check at each one. Bottom-left: OSI bottom-up. Bottom-right: possible problems and the fix we picked." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="350" y="40" width="1200" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="path_zone" value="The hybrid network path — &quot;walk the packet&quot; from cloud app to on-prem DB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#666;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="1820" height="450" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloud_app" value="1. Cloud App&#xa;(EC2 / Lambda)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="80" y="170" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_app_check" value="CHECK 1: Application&#xa;• Right hostname / IP?&#xa;• Right port (5432)?&#xa;• Credentials?&#xa;• Error: timeout (network)&#xa;  vs auth refused (creds)?" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fillColor=#fff8d6;strokeColor=#d6b656" vertex="1" parent="1">
+          <mxGeometry x="80" y="290" width="240" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloud_net" value="2. Cloud Network (AWS VPC)&#xa;Subnet + Security Group + Route Table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="380" y="170" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_net_check" value="CHECK 2: Cloud Network&#xa;• App is in a VPC subnet (not running over public internet)?&#xa;• Security Group allows outbound to on-prem CIDR on DB port?&#xa;• Route Table sends on-prem CIDR via the Virtual Private Gateway (VGW)?&#xa;Tools: VPC Reachability Analyzer, VPC Flow Logs" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fillColor=#fff8d6;strokeColor=#d6b656" vertex="1" parent="1">
+          <mxGeometry x="380" y="290" width="320" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="vpn" value="3. VPN Tunnel&#xa;(AWS VGW ↔ On-prem firewall, IPsec)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="760" y="170" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="vpn_check" value="CHECK 3: VPN Tunnel&#xa;• Tunnel state UP on both sides?&#xa;• IKE phase 1 + IPsec phase 2 negotiated?&#xa;• Pre-shared key matches both ends?&#xa;• Routes for both subnets configured?&#xa;Tools: aws ec2 describe-vpn-connections,&#xa;CloudWatch metric TunnelState,&#xa;on-prem &quot;show crypto&quot; command" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fillColor=#fff8d6;strokeColor=#d6b656;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="760" y="290" width="320" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="onprem_net" value="4. On-prem Network&#xa;Firewall + switch / VLAN + return route" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=14;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1140" y="170" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="onprem_net_check" value="CHECK 4: On-prem Network&#xa;• Firewall allows inbound from VPC CIDR on DB port?&#xa;• Return route back to AWS exists (no asymmetric routing)?&#xa;• DB server is in the right VLAN, port up, ARP works?&#xa;Tools: firewall console, ip neigh, switch CAM table" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fillColor=#fff8d6;strokeColor=#d6b656" vertex="1" parent="1">
+          <mxGeometry x="1140" y="290" width="320" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db" value="5. Database Server" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1530" y="170" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="db_check" value="CHECK 5: Database&#xa;• Listener running, on the right port?&#xa;• pg_hba.conf / GRANT&#xa;  allows the cloud user&#xa;  from the VPC CIDR?&#xa;• Credentials valid?&#xa;• TLS cert valid (if used)?&#xa;Tools: netstat -lntp,&#xa;DB logs, psql / mysql&#xa;client from cloud" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fillColor=#fff8d6;strokeColor=#d6b656" vertex="1" parent="1">
+          <mxGeometry x="1530" y="290" width="240" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="path_e1" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2" edge="1" parent="1" source="cloud_app" target="cloud_net">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="path_e2" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2" edge="1" parent="1" source="cloud_net" target="vpn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="path_e3" style="endArrow=classic;html=1;rounded=0;startArrow=classic;startFill=1;strokeColor=#82b366;strokeWidth=3;dashed=1" edge="1" parent="1" source="vpn" target="onprem_net">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="path_e4" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2" edge="1" parent="1" source="onprem_net" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="aws_label" value="AWS Cloud" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="125" width="620" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="onprem_label" value="On-Premises (Thailand)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1140" y="125" width="630" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="middle_label" value="Internet (encrypted IPsec)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="760" y="125" width="320" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="osi_zone" value="Diagnostic order: OSI bottom-up" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#666;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" vertex="1" parent="1">
+          <mxGeometry x="40" y="560" width="900" height="600" as="geometry" />
+        </mxCell>
+
+        <mxCell id="osi_l1" value="Layer 1 — Physical&#xa;On-prem cables, link lights, switch port up. (Cloud-side L1 is hidden by AWS — assume OK.)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#82b366;fontSize=11;verticalAlign=middle;align=left" vertex="1" parent="1">
+          <mxGeometry x="80" y="610" width="820" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="osi_l2" value="Layer 2 — Data Link&#xa;On-prem switch VLAN, ARP entry for DB IP, MAC learnt. Tools: ip neigh, switch CAM table." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#82b366;fontSize=11;verticalAlign=middle;align=left" vertex="1" parent="1">
+          <mxGeometry x="80" y="670" width="820" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="osi_l3" value="Layer 3 — Network (IP, routing)&#xa;Route tables (cloud + on-prem), VPN tunnel state, no CIDR overlap, return route exists, ICMP ping.&#xa;Tools: VPC Reachability Analyzer, traceroute, aws ec2 describe-vpn-connections." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#82b366;fontSize=11;verticalAlign=middle;align=left;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="730" width="820" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="osi_l4" value="Layer 4 — Transport (TCP/UDP, ports)&#xa;Security Group + NACL allow DB port outbound + return; on-prem firewall allows DB port inbound.&#xa;Tools: telnet on-prem-db-ip 5432 from cloud, VPC Flow Logs (look for REJECT)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#82b366;fontSize=11;verticalAlign=middle;align=left;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="820" width="820" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="osi_l567" value="Layer 5/6/7 — Session, TLS, Application&#xa;If DB needs TLS: cert valid + hostname matches.&#xa;DB listener running, pg_hba.conf / GRANT allows the cloud user, credentials valid, DNS resolves.&#xa;Tools: openssl s_client, psql / mysql client, on-prem DB logs." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#82b366;fontSize=11;verticalAlign=middle;align=left" vertex="1" parent="1">
+          <mxGeometry x="80" y="910" width="820" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="osi_note" value="Rule of thumb: if a low layer is broken, every higher layer fails. Always check L1 → L7 in order — don't debug TLS while the tunnel is down." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="80" y="1030" width="820" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="problems_zone" value="Possible problems &amp; the one we picked to fix" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#666;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" vertex="1" parent="1">
+          <mxGeometry x="970" y="560" width="890" height="600" as="geometry" />
+        </mxCell>
+
+        <mxCell id="prob_table" value="Possible causes (most common first):&#xa;1. VPN tunnel is down (PSK / proposal mismatch) ★ chosen&#xa;2. VPC route table missing route to on-prem CIDR via VGW&#xa;3. Security Group blocks outbound to DB port&#xa;4. NACL blocking outbound or return traffic (NACL is stateless!)&#xa;5. On-prem firewall blocks inbound from VPC CIDR&#xa;6. Asymmetric routing — on-prem has no return route to AWS&#xa;7. CIDR overlap between VPC and on-prem subnets&#xa;8. DNS resolution failure (cloud cannot resolve on-prem hostname)&#xa;9. DB listener not running, on wrong port, or bound to localhost&#xa;10. DB auth refused (pg_hba.conf / GRANT) — cloud IP not whitelisted&#xa;11. TLS / certificate problem on the DB&#xa;12. App not in a VPC, so traffic goes via internet, never via VGW&#xa;13. MTU / fragmentation on the IPsec tunnel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#666;fontSize=11;verticalAlign=top;align=left" vertex="1" parent="1">
+          <mxGeometry x="1010" y="610" width="800" height="280" as="geometry" />
+        </mxCell>
+
+        <mxCell id="chosen" value="★ Selected problem to fix: VPN tunnel is DOWN" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450" vertex="1" parent="1">
+          <mxGeometry x="1010" y="910" width="800" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fix_steps" value="Fix steps:&#xa;1. AWS console → VPC → Site-to-Site VPN connections → check tunnel status. Both tunnels DOWN.&#xa;2. CloudWatch metric TunnelState = 0 confirms.&#xa;3. Run: aws ec2 describe-vpn-connections — read the last status messages.&#xa;4. Check the on-prem device IPsec status — is the tunnel up on its side?&#xa;5. Compare configs both sides:&#xa;   • Pre-shared key matches?&#xa;   • IKE encryption / DH group / lifetime match?&#xa;   • IPsec proposals (Phase 2) match?&#xa;   • Local/remote networks match what AWS expects?&#xa;6. Restart tunnel from on-prem (clear IPsec SA), watch AWS console for state → UP.&#xa;7. Verify with VPC Reachability Analyzer: source = cloud, dest = on-prem DB IP/port → &quot;Reachable&quot;.&#xa;8. From the cloud app: telnet on-prem-db-ip 5432 — TCP handshake succeeds.&#xa;9. Document root cause and add a CloudWatch alarm on TunnelState = 0 → SNS → on-call." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#82b366;fontSize=11;verticalAlign=top;align=left" vertex="1" parent="1">
+          <mxGeometry x="1010" y="960" width="800" height="195" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

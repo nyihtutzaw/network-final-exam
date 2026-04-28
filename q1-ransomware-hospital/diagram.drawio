@@ -1,0 +1,218 @@
+<mxfile host="app.diagrams.net" agent="Claude">
+  <diagram id="q1-ransomware-hospital" name="Hospital Ransomware-Resilient Architecture">
+    <mxGraphModel dx="2515" dy="1465" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" value="Ransomware-Resilient Hospital Network &amp; Cloud Architecture" vertex="1">
+          <mxGeometry height="30" width="900" x="400" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="internet" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" value="Internet&#xa;(Public Users / Patients)" vertex="1">
+          <mxGeometry height="70" width="180" x="760" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zone_onprem" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" value="ON-PREMISES HOSPITAL NETWORK (Thailand — PDPA-compliant)" vertex="1">
+          <mxGeometry height="780" width="780" x="40" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="onprem_ngfw" parent="1" style="shape=mxgraph.cisco.security.firewall;html=1;pointerEvents=1;dashed=0;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;fontSize=11;fontStyle=1" value="Firewall + IDS/IPS&#xa;(VPN endpoint,&#xa;outbound filtering)" vertex="1">
+          <mxGeometry height="60" width="60" x="370" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="onprem_internal_fw" parent="1" style="shape=mxgraph.cisco.security.firewall;html=1;dashed=0;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;fontSize=10" value="Internal Firewall&#xa;(VLAN segmentation:&#xa;workstations ↔ servers ↔ backup)" vertex="1">
+          <mxGeometry height="60" width="60" x="230" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="onprem_ws_vlan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;verticalAlign=top;align=center" value="WORKSTATION VLAN&#xa;(Staff PCs — EDR agent installed)" vertex="1">
+          <mxGeometry height="170" width="240" x="80" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="ws1" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.pc;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=9" value="PC + EDR" vertex="1">
+          <mxGeometry height="40" width="40" x="105" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="ws2" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.pc;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=9" value="PC + EDR" vertex="1">
+          <mxGeometry height="40" width="40" x="180" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="ws3" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.pc;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=9" value="PC + EDR" vertex="1">
+          <mxGeometry height="40" width="40" x="255" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="ws_note" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=2" value="Cannot reach DB VLAN directly.&#xa;SMB/RDP locked down.&#xa;MFA on every login." vertex="1">
+          <mxGeometry height="50" width="230" x="85" y="575" as="geometry" />
+        </mxCell>
+        <mxCell id="onprem_srv_vlan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=top;align=center" value="SERVER VLAN&#xa;(App + Patient DB — data resident in TH)" vertex="1">
+          <mxGeometry height="170" width="220" x="350" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="app_srv" parent="1" style="shape=mxgraph.cisco.servers.standard_host;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=9;fontStyle=1" value="App Server&#xa;+ EDR" vertex="1">
+          <mxGeometry height="50" width="40" x="375" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="db_srv" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;fontStyle=1" value="Patient DB&#xa;(encrypted)" vertex="1">
+          <mxGeometry height="60" width="60" x="475" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_note" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=2" value="Honeyfiles (trap files).&#xa;DB only accepts the App Server&#xa;and cloud apps via VPN." vertex="1">
+          <mxGeometry height="50" width="210" x="355" y="585" as="geometry" />
+        </mxCell>
+        <mxCell id="onprem_bk_vlan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;verticalAlign=top;align=center" value="BACKUP VLAN (isolated)" vertex="1">
+          <mxGeometry height="170" width="200" x="600" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="bk_srv" parent="1" style="shape=mxgraph.cisco.servers.standard_host;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=9;fontStyle=1" value="Backup Server&#xa;(write-only access)" vertex="1">
+          <mxGeometry height="50" width="40" x="680" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="bk_note" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=2" value="Outbound only to cloud&#xa;Object Lock and to tape.&#xa;Nothing else." vertex="1">
+          <mxGeometry height="50" width="190" x="605" y="585" as="geometry" />
+        </mxCell>
+        <mxCell id="onprem_vpn" parent="1" style="shape=mxgraph.cisco.security.vpn_concentrator;html=1;dashed=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=10;fontStyle=1" value="Site-to-Site&#xa;VPN Gateway&#xa;(IPsec / IKEv2)" vertex="1">
+          <mxGeometry height="50" width="60" x="700" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="onprem_idp_local" parent="1" style="shape=mxgraph.cisco.servers.standard_host;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=9" value="Local AD / DC&#xa;(federated to Cloud IDP)" vertex="1">
+          <mxGeometry height="50" width="40" x="100" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="onprem_legend" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2;fillColor=#fffae6;strokeColor=#d6b656" value="On-prem controls: Firewall for VPN endpoint + outbound filtering, internal firewall for VLAN segmentation, EDR on every PC/server, honeyfiles, MFA on every login, patch management." vertex="1">
+          <mxGeometry height="40" width="500" x="280" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="zone_cloud" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" value="AWS CLOUD — Region: ap-southeast-7 (Asia Pacific — Bangkok)" vertex="1">
+          <mxGeometry height="780" width="800" x="860" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_vpn" parent="1" style="shape=mxgraph.cisco.security.vpn_concentrator;html=1;dashed=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=10;fontStyle=1" value="AWS Site-to-Site VPN&#xa;(Virtual Private Gateway)" vertex="1">
+          <mxGeometry height="50" width="60" x="880" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_waf" parent="1" style="shape=mxgraph.cisco.security.web_security;html=1;dashed=0;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=10;fontStyle=1" value="AWS WAF&#xa;(SQL injection rules,&#xa;OWASP Top 10)" vertex="1">
+          <mxGeometry height="60" width="60" x="1020" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_alb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" value="Application Load Balancer (ALB)&#xa;HTTPS / TLS via ACM cert" vertex="1">
+          <mxGeometry height="50" width="220" x="1140" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_public_subnet" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#82b366;fontSize=10;fontStyle=2;dashed=1;verticalAlign=top;align=center" value="PUBLIC SUBNET" vertex="1">
+          <mxGeometry height="110" width="380" x="1000" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_app_subnet" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=top;align=center" value="PRIVATE APP SUBNET — EC2 Auto Scaling Group (multi-AZ)" vertex="1">
+          <mxGeometry height="170" width="380" x="1000" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="appvm_az1" parent="1" style="shape=mxgraph.cisco.servers.standard_host;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=9" value="EC2 App&#xa;AZ-1" vertex="1">
+          <mxGeometry height="50" width="40" x="1040" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="appvm_az2" parent="1" style="shape=mxgraph.cisco.servers.standard_host;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=9" value="EC2 App&#xa;AZ-2" vertex="1">
+          <mxGeometry height="50" width="40" x="1130" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="appvm_az3" parent="1" style="shape=mxgraph.cisco.servers.standard_host;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=9" value="EC2 App&#xa;AZ-3" vertex="1">
+          <mxGeometry height="50" width="40" x="1220" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="appsg" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=2" value="Security Group: only ALB → app:443; app → on-prem DB:5432 over VPN" vertex="1">
+          <mxGeometry height="40" width="360" x="1010" y="445" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_mgmt_subnet" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;verticalAlign=top;align=center" value="MGMT SUBNET" vertex="1">
+          <mxGeometry height="170" width="100" x="880" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="bastion" parent="1" style="shape=mxgraph.cisco.servers.standard_host;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=9" value="SSM Session&#xa;Manager&#xa;(PAM, MFA, JIT)" vertex="1">
+          <mxGeometry height="50" width="40" x="905" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_idp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" value="AWS IAM Identity Center&#xa;(OAuth/OIDC SSO,&#xa;MFA enforced)" vertex="1">
+          <mxGeometry height="60" width="160" x="880" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_guardduty" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" value="GuardDuty&#xa;(threat detection)" vertex="1">
+          <mxGeometry height="60" width="120" x="1050" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_securityhub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" value="Security Hub&#xa;(alert dashboard)" vertex="1">
+          <mxGeometry height="60" width="140" x="1160" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_soar" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" value="SOAR&#xa;EventBridge +&#xa;Lambda /&#xa;Step Functions" vertex="1">
+          <mxGeometry height="60" width="140" x="1370" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_immutable" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1" value="Amazon S3 + Object Lock&#xa;(immutable cloud copy,&#xa;write-once for retention)" vertex="1">
+          <mxGeometry height="80" width="180" x="1420" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_legend" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2;fillColor=#e6f3e6;strokeColor=#82b366" value="AWS controls: WAF, ALB, multi-AZ EC2 ASG, IAM Identity Center w/ MFA, GuardDuty + Security Hub, EventBridge → Lambda response, S3 Object Lock, SSM Session Manager." vertex="1">
+          <mxGeometry height="40" width="540" x="1000" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="zone_offsite" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" value="PHYSICAL SECONDARY SITE (off-site, Thailand) — Air-gapped tape vault" vertex="1">
+          <mxGeometry height="180" width="1620" x="40" y="970" as="geometry" />
+        </mxCell>
+        <mxCell id="tape_vault" parent="1" style="shape=mxgraph.cisco.storage.tape_array;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=11;fontStyle=1" value="LTO Tape Vault&#xa;(offline, rotated weekly,&#xa;physically secured)" vertex="1">
+          <mxGeometry height="80" width="80" x="780" y="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="offsite_note" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=2;fillColor=#fafafa;strokeColor=#999999" value="3-2-1-1-0 backup rule: 3 copies, 2 media types (disk + tape), 1 off-site, 1 immutable/offline, 0 errors after restore test.&#xa;The air-gapped tape and the cloud Object Lock together satisfy the &quot;super secure, hard for attackers to delete&quot; requirement." vertex="1">
+          <mxGeometry height="80" width="640" x="100" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="thailaw_note" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656" value="THAI DATA RESIDENCY (PDPA): Patient DB lives on-prem in TH. Cloud region is Thai region. Backups stay in Thailand." vertex="1">
+          <mxGeometry height="80" width="720" x="900" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="e_internet_alb" edge="1" parent="1" source="internet" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0" target="cloud_waf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_internet_alb_lbl" connectable="0" parent="e_internet_alb" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1" value="HTTPS 443 → public web app (CloudFront → WAF → ALB in cloud)" vertex="1">
+          <mxGeometry relative="1" x="-0.1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ngfw_intfw" edge="1" parent="1" source="onprem_ngfw" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2" target="onprem_internal_fw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_intfw_ws" edge="1" parent="1" source="onprem_internal_fw" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=2" target="onprem_ws_vlan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_intfw_srv" edge="1" parent="1" source="onprem_internal_fw" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;strokeWidth=2" target="onprem_srv_vlan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_intfw_bk" edge="1" parent="1" source="onprem_internal_fw" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2" target="onprem_bk_vlan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_vpn_tunnel" edge="1" parent="1" source="onprem_vpn" style="endArrow=classic;html=1;rounded=0;startArrow=classic;startFill=1;strokeColor=#82b366;strokeWidth=3;dashed=1" target="cloud_vpn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_vpn_tunnel_lbl" connectable="0" parent="e_vpn_tunnel" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1;fillColor=#fff" value="IPsec Site-to-Site VPN (encrypted, AES-256)&#xa;Patient DB is NOT exposed to internet — only reachable via VPN tunnel" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_app_db" edge="1" parent="1" source="appvm_az2" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;strokeWidth=2;dashed=1" target="onprem_vpn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_app_db_lbl" connectable="0" parent="e_app_db" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" value="DB queries via VPN&#xa;(private, never via internet)" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_waf_alb" edge="1" parent="1" source="cloud_waf" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2" target="cloud_alb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_alb_app" edge="1" parent="1" source="cloud_alb" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;strokeWidth=2" target="cloud_app_subnet">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_idp_app" edge="1" parent="1" source="cloud_idp" style="endArrow=classic;html=1;rounded=0;strokeColor=#82b366;strokeWidth=1;dashed=1" target="appvm_az1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_idp_app_lbl" connectable="0" parent="e_idp_app" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" value="OAuth/OIDC + MFA" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_idp_localad" edge="1" parent="1" source="cloud_idp" style="endArrow=classic;html=1;rounded=0;startArrow=classic;startFill=1;strokeColor=#82b366;strokeWidth=1;dashed=1" target="onprem_idp_local">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_idp_localad_lbl" connectable="0" parent="e_idp_localad" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" value="Federated SSO" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_securityhub_soar" edge="1" parent="1" source="cloud_securityhub" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=2" target="cloud_soar">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_securityhub_soar_lbl" connectable="0" parent="e_securityhub_soar" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" value="alert" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_edr_guardduty" edge="1" parent="1" source="onprem_ws_vlan" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=1;dashed=1" target="cloud_guardduty">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_edr_guardduty_lbl" connectable="0" parent="e_edr_guardduty" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" value="EDR + log telemetry" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_bk_immutable" edge="1" parent="1" source="onprem_bk_vlan" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2" target="cloud_immutable">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_bk_immutable_lbl" connectable="0" parent="e_bk_immutable" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" value="AWS Storage Gateway&#xa;→ S3 Object Lock" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_bk_tape" edge="1" parent="1" source="onprem_bk_vlan" style="endArrow=classic;html=1;rounded=0;strokeColor=#666;strokeWidth=2;dashed=1" target="tape_vault">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_bk_tape_lbl" connectable="0" parent="e_bk_tape" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" value="Storage Gateway (Tape) → LTO&#xa;(rotated off-site, air-gapped)" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_bastion_app" edge="1" parent="1" source="bastion" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=1;dashed=1" target="appvm_az1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_bastion_app_lbl" connectable="0" parent="e_bastion_app" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fillColor=#fff" value="Audited shell session&#xa;(no SSH, no port 22)" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

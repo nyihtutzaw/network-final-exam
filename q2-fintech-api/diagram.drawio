@@ -1,0 +1,299 @@
+<mxfile host="app.diagrams.net" modified="2026-04-28T00:00:00.000Z" agent="Claude" version="29.7.9">
+  <diagram id="q2-fintech-api" name="Fintech API Architecture">
+    <mxGraphModel dx="2000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Secure Cloud Network for Fintech API (AWS — region ap-southeast-7 Bangkok)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="400" y="10" width="1100" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="mobile_users" value="Mobile App Users&#xa;(iOS / Android)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="60" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="admin_users" value="Internal Admins&#xa;(SSO + MFA)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1620" y="60" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="google_api" value="Google Maps&#xa;Timeline API&#xa;(external)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="320" y="60" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="zone_aws" value="AWS CLOUD — Region: ap-southeast-7 (Bangkok), multi-AZ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" vertex="1" parent="1">
+          <mxGeometry x="40" y="160" width="1820" height="780" as="geometry" />
+        </mxCell>
+
+        <mxCell id="route53" value="Route 53&#xa;(DNS — 1st hop:&#xa;mobile resolves api.fintech.co.th)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="240" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloudfront" value="CloudFront&#xa;(CDN, TLS 1.3 — anti-eavesdropping)&#xa;★ AWS Shield Advanced attached (DDoS — req 6.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#b85450;strokeWidth=3;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="380" y="195" width="380" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="waf" value="AWS WAF&#xa;(SQL injection rules, OWASP, rate limit, geo-match)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="820" y="200" width="360" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="alb" value="Application Load Balancer (ALB)&#xa;HTTPS / TLS via ACM cert, multi-AZ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="600" y="290" width="400" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cognito" value="Amazon Cognito&#xa;User Pool&#xa;(OAuth 2.0 / OIDC)&#xa;Issues JWT + refresh tokens" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="200" y="290" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ec2_layer" value="EC2 Auto Scaling Group — API servers (multi-AZ, scales for payday spikes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;verticalAlign=top;align=center" vertex="1" parent="1">
+          <mxGeometry x="500" y="400" width="720" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_az1" value="EC2 API server&#xa;AZ-1" style="shape=mxgraph.cisco.servers.standard_host;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="560" y="450" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_az2" value="EC2 API server&#xa;AZ-2" style="shape=mxgraph.cisco.servers.standard_host;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="730" y="450" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_az3" value="EC2 API server&#xa;AZ-3" style="shape=mxgraph.cisco.servers.standard_host;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="900" y="450" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_note" value="App code does: JWT validation (Cognito JWKS) + fraud-check middleware (Task 3) + business logic.&#xa;Auto Scaling triggers: target CPU 60%, scheduled scale-up before payday." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="540" y="520" width="660" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dynamodb" value="DynamoDB&#xa;(rate-limit counters,&#xa;fraud-check cache,&#xa;audit log)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="540" y="600" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="elasticache" value="ElastiCache&#xa;(Redis,&#xa;session cache)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="730" y="600" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="vpn_aws" value="AWS Site-to-Site VPN&#xa;(Virtual Private Gateway)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1140" y="600" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ssm" value="AWS Systems Manager&#xa;Session Manager&#xa;(Admin access — req 3,&#xa;no SSH, audit-logged)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1400" y="290" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="iam_idc" value="AWS IAM Identity Center&#xa;(internal staff SSO + MFA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1400" y="200" width="240" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lambda_helpers" value="Small Lambda functions (event-triggered only)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;verticalAlign=top;align=center" vertex="1" parent="1">
+          <mxGeometry x="1400" y="400" width="280" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="lambda_cron" value="nightly-summary Lambda&#xa;(EventBridge Scheduler:&#xa;runs at 23:00 daily — req 4)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#000;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1420" y="430" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="lambda_soar" value="SOAR playbook Lambdas&#xa;(EventBridge → Lambda:&#xa;auto-isolate, disable user)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#000;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1420" y="495" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="security_layer" value="Detection &amp; Response (req 6.1, 6.2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;verticalAlign=top;align=center" vertex="1" parent="1">
+          <mxGeometry x="1140" y="690" width="700" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="guardduty" value="GuardDuty&#xa;(threat detection,&#xa;eavesdropping,&#xa;anomaly)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1160" y="730" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="guardduty_note" value="auto-ingests: CloudTrail, VPC Flow Logs, DNS logs" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontStyle=2;italic=1" vertex="1" parent="1">
+          <mxGeometry x="1160" y="785" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="security_hub" value="Security Hub&#xa;(aggregator)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1340" y="730" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudtrail" value="CloudTrail +&#xa;VPC Flow Logs +&#xa;OpenSearch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1500" y="730" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="eventbridge" value="EventBridge&#xa;(triggers SOAR Lambdas)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1680" y="730" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="security_note" value="Eavesdropping → TLS 1.3 everywhere (CloudFront, ALB, internal). &#xa;SQL injection → AWS WAF managed rules + parameterised queries in EC2 app code. &#xa;DDoS → Shield Advanced + WAF rate limits + CloudFront absorption." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="1160" y="800" width="660" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="zone_onprem" value="ON-PREMISES (Thailand) — Customer data resident in TH per PDPA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" vertex="1" parent="1">
+          <mxGeometry x="40" y="970" width="900" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="onprem_fw" value="On-prem Firewall&#xa;+ VPN endpoint" style="shape=mxgraph.cisco.security.firewall;html=1;dashed=0;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="100" y="1020" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="onprem_db" value="Customer Database&#xa;(personal data, on-prem,&#xa;encrypted at rest)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="240" y="1010" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="accounting" value="Accounting System&#xa;(receives nightly summaries — req 4)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="500" y="1020" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="onprem_note" value="EC2 servers reach the customer DB only via VPN (req 1.2). &#xa;Nightly: EventBridge Scheduler → nightly-summary Lambda → DataSync → Accounting." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="100" y="1110" width="800" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="zone_backup" value="BACKUP — Cloud + Off-site (req 5)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" vertex="1" parent="1">
+          <mxGeometry x="970" y="970" width="890" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="aws_backup" value="AWS Backup&#xa;(scheduled jobs)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1010" y="1020" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s3_backup" value="Amazon S3 + Object Lock&#xa;(immutable cloud copy,&#xa;super secure — req 5)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1230" y="1010" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tape_gw" value="Storage Gateway&#xa;(Tape Gateway)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1500" y="1020" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tape_offsite" value="LTO Tape Vault&#xa;(off-site, air-gapped,&#xa;Thailand)" style="shape=mxgraph.cisco.storage.tape_array;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1710" y="1020" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="backup_note" value="3-2-1-1-0: 3 copies, 2 media (disk + tape), 1 off-site, 1 immutable (Object Lock + tape), 0 errors after restore tests." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="1010" y="1120" width="780" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_mob_route53" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2" edge="1" parent="1" source="mobile_users" target="route53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mob_route53_lbl" value="(1) DNS lookup" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" vertex="1" connectable="0" parent="e_mob_route53">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_route53_cf" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2" edge="1" parent="1" source="route53" target="cloudfront">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_route53_cf_lbl" value="(2) HTTPS / TLS 1.3 to CloudFront edge" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" vertex="1" connectable="0" parent="e_route53_cf">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_cf_waf" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2" edge="1" parent="1" source="cloudfront" target="waf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_waf_alb" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2" edge="1" parent="1" source="waf" target="alb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_alb_ec2" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;strokeWidth=2" edge="1" parent="1" source="alb" target="ec2_layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_mob_cognito" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2;dashed=1" edge="1" parent="1" source="mobile_users" target="cognito">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mob_cognito_lbl" value="OAuth 2.0 login → JWT&#xa;(Task 2: SSO across all endpoints)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff;fontStyle=1" vertex="1" connectable="0" parent="e_mob_cognito">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_cognito_ec2" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2;dashed=1" edge="1" parent="1" source="cognito" target="ec2_layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cognito_ec2_lbl" value="EC2 app validates JWT&#xa;(Cognito JWKS)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" vertex="1" connectable="0" parent="e_cognito_ec2">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_ec2_dynamo" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;strokeWidth=2" edge="1" parent="1" source="ec2_layer" target="dynamodb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ec2_cache" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=2" edge="1" parent="1" source="ec2_layer" target="elasticache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ec2_vpn" style="endArrow=classic;html=1;rounded=0;strokeColor=#82b366;strokeWidth=2" edge="1" parent="1" source="ec2_layer" target="vpn_aws">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ec2_vpn_lbl" value="DB queries via VPN" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" vertex="1" connectable="0" parent="e_ec2_vpn">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_vpn_onprem" style="endArrow=classic;html=1;rounded=0;startArrow=classic;startFill=1;strokeColor=#82b366;strokeWidth=3;dashed=1" edge="1" parent="1" source="vpn_aws" target="onprem_fw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_vpn_onprem_lbl" value="IPsec Site-to-Site VPN&#xa;(encrypted, AES-256)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1;fillColor=#fff" vertex="1" connectable="0" parent="e_vpn_onprem">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_onpremfw_db" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;strokeWidth=2" edge="1" parent="1" source="onprem_fw" target="onprem_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_onpremfw_acct" style="endArrow=classic;html=1;rounded=0;strokeColor=#82b366;strokeWidth=2" edge="1" parent="1" source="onprem_fw" target="accounting">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_admin_idc" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2;dashed=1" edge="1" parent="1" source="admin_users" target="iam_idc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_idc_ssm" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2;dashed=1" edge="1" parent="1" source="iam_idc" target="ssm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ssm_ec2" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=1;dashed=1" edge="1" parent="1" source="ssm" target="ec2_layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_ec2_google" style="endArrow=classic;html=1;rounded=0;strokeColor=#d6b656;strokeWidth=2;dashed=1" edge="1" parent="1" source="ec2_layer" target="google_api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ec2_google_lbl" value="fraud-check middleware&#xa;reads user's last 90d Timeline&#xa;(Task 3)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff;fontStyle=1" vertex="1" connectable="0" parent="e_ec2_google">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_aws_backup_s3" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2" edge="1" parent="1" source="aws_backup" target="s3_backup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s3_tape" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2" edge="1" parent="1" source="s3_backup" target="tape_gw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tape_offsite" style="endArrow=classic;html=1;rounded=0;strokeColor=#666;strokeWidth=2;dashed=1" edge="1" parent="1" source="tape_gw" target="tape_offsite">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tape_offsite_lbl" value="air-gapped" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" vertex="1" connectable="0" parent="e_tape_offsite">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_dynamo_backup" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=1;dashed=1" edge="1" parent="1" source="dynamodb" target="aws_backup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_aurora_backup" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=1;dashed=1" edge="1" parent="1" source="aurora" target="aws_backup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_ec2_eb" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=1;dashed=1" edge="1" parent="1" source="ec2_layer" target="cloudtrail">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cloudtrail_gd" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=2" edge="1" parent="1" source="cloudtrail" target="guardduty">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gd_cloudtrail_lbl" value="analyzes logs" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fillColor=#fff;fontStyle=2" vertex="1" connectable="0" parent="e_cloudtrail_gd">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_eb_security" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=2" edge="1" parent="1" source="cloudtrail" target="security_hub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gd_security" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=2" edge="1" parent="1" source="guardduty" target="security_hub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_route53_gd" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=1;dashed=1" edge="1" parent="1" source="route53" target="guardduty">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_route53_gd_lbl" value="DNS logs" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fillColor=#fff;fontStyle=2" vertex="1" connectable="0" parent="e_route53_gd">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_vpc_gd" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=1;dashed=1" edge="1" parent="1" source="ec2_layer" target="guardduty">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_vpc_gd_lbl" value="VPC Flow Logs" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fillColor=#fff;fontStyle=2" vertex="1" connectable="0" parent="e_vpc_gd">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_security_eb" style="endArrow=classic;html=1;rounded=0;strokeColor=#d6b656;strokeWidth=2" edge="1" parent="1" source="security_hub" target="eventbridge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_eb_soar" style="endArrow=classic;html=1;rounded=0;strokeColor=#d6b656;strokeWidth=2" edge="1" parent="1" source="eventbridge" target="lambda_soar">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

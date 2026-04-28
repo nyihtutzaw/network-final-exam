@@ -1,0 +1,279 @@
+<mxfile host="app.diagrams.net" modified="2026-04-28T00:00:00.000Z" agent="Claude" version="29.7.9">
+  <diagram id="q3-student-submission" name="Student Submission Platform">
+    <mxGraphModel dx="2000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Student Project Submission Platform — AWS Serverless (region ap-southeast-7 Bangkok)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="350" y="10" width="1200" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="users_students" value="Students&#xa;(web browser)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="120" y="60" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="users_teachers" value="Teachers&#xa;(web browser)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="380" y="60" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="users_admin" value="Admins&#xa;(SSO + MFA)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1620" y="60" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="zone_aws" value="AWS CLOUD — Region: ap-southeast-7 (Bangkok), serverless-first" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" vertex="1" parent="1">
+          <mxGeometry x="40" y="160" width="1820" height="780" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloudfront" value="CloudFront + WAF&#xa;(CDN, TLS, virus/malware rule sets)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="280" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="frontend_s3" value="S3 Static Website Hosting&#xa;(React SPA — PaaS managed hosting)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="80" y="290" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cognito" value="Amazon Cognito User Pool&#xa;(SaaS auth — Task 2)&#xa;Groups: students, teachers, admins" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="80" y="400" width="280" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="apigw" value="Amazon API Gateway&#xa;(REST + WebSocket — PaaS)&#xa;JWT authorizer + role check" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="500" y="200" width="380" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="appsync" value="AWS AppSync&#xa;(GraphQL + WebSocket subs — PaaS)&#xa;real-time chat (req 3.5)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="920" y="200" width="280" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lambda_layer" value="AWS Lambda functions (FaaS — req 3.x business logic)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;verticalAlign=top;align=center" vertex="1" parent="1">
+          <mxGeometry x="500" y="320" width="700" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="l_submit" value="submission-api&#xa;Lambda&#xa;(req 3.2, 3.4)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#000;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="520" y="360" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="l_grade" value="grading-api&#xa;Lambda&#xa;(req 3.3)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#000;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="690" y="360" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="l_chat" value="chat-resolver&#xa;Lambda&#xa;(req 3.5)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#000;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="860" y="360" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="l_grades_sync" value="grade-sync&#xa;Lambda&#xa;(req 3.9 — onprem)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#000;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1030" y="360" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="l_virus" value="virus-scan&#xa;Lambda&#xa;(S3 trigger — req 3.7)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#000;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="520" y="440" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="l_plag" value="plagiarism&#xa;Lambda&#xa;(req 3.8)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#000;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="690" y="440" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="l_notify" value="notification&#xa;Lambda&#xa;(req 3.6)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#000;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="860" y="440" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="l_misc" value="other Lambdas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#000;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1030" y="440" width="150" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dynamodb" value="DynamoDB&#xa;(PaaS NoSQL —&#xa;courses, submissions,&#xa;grades, chat msgs)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1240" y="320" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s3_uploads" value="S3 Uploads Bucket&#xa;(req 3.2 — PaaS object storage,&#xa;lifecycle: keep 1 month then archive)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1240" y="450" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="eventbridge" value="EventBridge&#xa;(event bus, scheduler)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1500" y="320" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ses" value="Amazon SES&#xa;(SaaS email — req 3.6)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1500" y="400" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="external_plag" value="3rd-party Plagiarism&#xa;SaaS&#xa;(e.g., Turnitin /&#xa;Copyleaks API)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="1500" y="480" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="iam_idc" value="AWS IAM Identity Center + Session Manager&#xa;(admin access — req 1.4)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1480" y="200" width="320" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="security_layer" value="Detection &amp; Response (req 2.1, 2.2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;verticalAlign=top;align=center" vertex="1" parent="1">
+          <mxGeometry x="80" y="600" width="700" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="guardduty" value="GuardDuty&#xa;(threat detection)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="100" y="640" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="security_hub" value="Security Hub" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="280" y="640" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudtrail" value="CloudTrail +&#xa;CloudWatch Logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="420" y="640" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="event_soar" value="EventBridge → Lambda&#xa;SOAR playbooks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="600" y="640" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="security_note" value="Virus / malware (req 2.1): S3 PUT event → virus-scan Lambda → ClamAV in container, or VirusTotal API. &#xa;Infected file → quarantine bucket, delete from uploads, notify uploader. &#xa;IR (req 2.2): GuardDuty alert → EventBridge → Lambda playbook (disable user, snapshot resources, ticket)." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="100" y="710" width="660" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="vpn_aws" value="AWS Site-to-Site VPN&#xa;(Virtual Private Gateway — req 1.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1240" y="600" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="zone_onprem" value="ON-PREMISES (Thailand) — Student profile + records (req 3.9)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" vertex="1" parent="1">
+          <mxGeometry x="40" y="970" width="900" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="onprem_fw" value="On-prem Firewall&#xa;+ VPN endpoint" style="shape=mxgraph.cisco.security.firewall;html=1;dashed=0;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="100" y="1020" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="onprem_db" value="Student Profile DB&#xa;(records, grades — req 3.9)&#xa;Updates via API only" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="240" y="1010" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="onprem_api" value="On-prem Grade API&#xa;(receives grade updates&#xa;from cloud via VPN)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="540" y="1020" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="onprem_note" value="grade-sync Lambda calls on-prem API over VPN whenever a grade is finalised. &#xa;Student profile DB stays on-prem in TH per university policy." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="100" y="1110" width="800" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="zone_backup" value="BACKUP — Cloud + Off-site" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;fontStyle=1;verticalAlign=top;align=center;arcSize=4" vertex="1" parent="1">
+          <mxGeometry x="970" y="970" width="890" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="aws_backup" value="AWS Backup&#xa;(scheduled jobs)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1010" y="1020" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s3_backup" value="Amazon S3 + Object Lock&#xa;(immutable cloud copy)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1230" y="1010" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tape_gw" value="Storage Gateway&#xa;(Tape Gateway)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;verticalAlign=middle;align=center" vertex="1" parent="1">
+          <mxGeometry x="1500" y="1020" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tape_offsite" value="LTO Tape Vault&#xa;(off-site, air-gapped)" style="shape=mxgraph.cisco.storage.tape_array;html=1;fillColor=#fff;strokeColor=#000;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1710" y="1020" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="backup_note" value="3-2-1-1-0 backup. Object Lock = super-secure copy. Tape = air-gapped copy." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="1010" y="1130" width="780" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend_box" value="Cloud-service categories used:&#xa;• PaaS — S3, CloudFront, API Gateway, AppSync, DynamoDB, EventBridge&#xa;• SaaS — Cognito, SES, 3rd-party plagiarism API&#xa;• FaaS / Serverless — AWS Lambda for all business logic, virus scan, plagiarism, notifications, grade sync" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=2;fillColor=#f0f8ff;strokeColor=#6c8ebf" vertex="1" parent="1">
+          <mxGeometry x="800" y="600" width="420" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_users_cf" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2" edge="1" parent="1" source="users_students" target="cloudfront">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_teachers_cf" style="endArrow=classic;html=1;rounded=0;strokeColor=#000;strokeWidth=2" edge="1" parent="1" source="users_teachers" target="cloudfront">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_cf_s3" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;strokeWidth=2" edge="1" parent="1" source="cloudfront" target="frontend_s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_users_cognito" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2;dashed=1" edge="1" parent="1" source="users_students" target="cognito">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_users_cognito_lbl" value="OAuth login → JWT&#xa;(role: students | teachers)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff;fontStyle=1" vertex="1" connectable="0" parent="e_users_cognito">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_cognito_apigw" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2;dashed=1" edge="1" parent="1" source="cognito" target="apigw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_apigw_lambda" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;strokeWidth=2" edge="1" parent="1" source="apigw" target="lambda_layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_appsync_chat" style="endArrow=classic;html=1;rounded=0;strokeColor=#82b366;strokeWidth=2" edge="1" parent="1" source="appsync" target="l_chat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_lambda_dynamo" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;strokeWidth=2" edge="1" parent="1" source="lambda_layer" target="dynamodb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_lambda_s3" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;strokeWidth=2" edge="1" parent="1" source="l_submit" target="s3_uploads">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lambda_s3_lbl" value="presigned PUT&#xa;(direct browser upload)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" vertex="1" connectable="0" parent="e_lambda_s3">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_s3_virus" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=2" edge="1" parent="1" source="s3_uploads" target="l_virus">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s3_virus_lbl" value="S3 PUT event" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff;fontStyle=1" vertex="1" connectable="0" parent="e_s3_virus">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_virus_plag" style="endArrow=classic;html=1;rounded=0;strokeColor=#82b366;strokeWidth=2" edge="1" parent="1" source="l_virus" target="l_plag">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_virus_plag_lbl" value="if clean → trigger plagiarism" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" vertex="1" connectable="0" parent="e_virus_plag">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_plag_external" style="endArrow=classic;html=1;rounded=0;strokeColor=#d6b656;strokeWidth=2;dashed=1" edge="1" parent="1" source="l_plag" target="external_plag">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_plag_external_lbl" value="HTTPS API call" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fillColor=#fff" vertex="1" connectable="0" parent="e_plag_external">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_eb_notify" style="endArrow=classic;html=1;rounded=0;strokeColor=#d6b656;strokeWidth=2" edge="1" parent="1" source="eventbridge" target="l_notify">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_notify_ses" style="endArrow=classic;html=1;rounded=0;strokeColor=#d6b656;strokeWidth=2" edge="1" parent="1" source="l_notify" target="ses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_grades_vpn" style="endArrow=classic;html=1;rounded=0;strokeColor=#82b366;strokeWidth=2" edge="1" parent="1" source="l_grades_sync" target="vpn_aws">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_vpn_onprem" style="endArrow=classic;html=1;rounded=0;startArrow=classic;startFill=1;strokeColor=#82b366;strokeWidth=3;dashed=1" edge="1" parent="1" source="vpn_aws" target="onprem_fw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_vpn_onprem_lbl" value="IPsec Site-to-Site VPN" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1;fillColor=#fff" vertex="1" connectable="0" parent="e_vpn_onprem">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_onpremfw_api" style="endArrow=classic;html=1;rounded=0;strokeColor=#82b366;strokeWidth=2" edge="1" parent="1" source="onprem_fw" target="onprem_api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_api_db" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;strokeWidth=2" edge="1" parent="1" source="onprem_api" target="onprem_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_admin_idc" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2;dashed=1" edge="1" parent="1" source="users_admin" target="iam_idc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_dynamo_backup" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=1;dashed=1" edge="1" parent="1" source="dynamodb" target="aws_backup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_aws_backup_s3" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2" edge="1" parent="1" source="aws_backup" target="s3_backup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s3_tape" style="endArrow=classic;html=1;rounded=0;strokeColor=#9673a6;strokeWidth=2" edge="1" parent="1" source="s3_backup" target="tape_gw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tape_offsite" style="endArrow=classic;html=1;rounded=0;strokeColor=#666;strokeWidth=2;dashed=1" edge="1" parent="1" source="tape_gw" target="tape_offsite">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
